@@ -1,13 +1,12 @@
-import java.util.Scanner;
-public class Example2
+public class Main
 {
 public static void main(String[] args)
-{
-Scanner input=new Scanner(System.in);
-System.out.print("enter name: ");
-String na=input.nextLine();
-System.out.print("enter age: ");
-int age=input.nextInt();
-System.out.println("name:"+na+"\nage:"+age);	
+int i = 0;
+do {
+  System.out.println(i);
+  i++;
+}
+while (i < 5);
+
 }
 }
