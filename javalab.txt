@@ -1,0 +1,532 @@
+1. CO3.1 Area of different shapes using overloaded functions 
+/*Method Overloading allows different methods to have the same name, but different signatures where the signature 
+can differ by the number of input parameters or type of input parameters, or a mixture of both */
+//Overload.java
+import java.util.Scanner;
+public class Overload
+{
+ void area (double r)
+ {
+ double Ar = 3.14*r*r;
+ System.out.println ("Area of Circle = "+Ar);
+ }
+ void area (int len, int br)
+ {
+ int Ar = len*br;
+ System.out.println("Area of Rectangle = "+ Ar);
+ }
+ void area (int l, int b, int h)
+ {
+ int Ar = l*b*h;
+ System.out.println("Area of Cuboid = "+ Ar);
+ }
+ public static void main(String[] args)
+ {
+ Scanner sc = new Scanner(System.in);
+ Overload obj1 = new Overload() ;
+ System.out.println ("Enter the Radius");
+ int r = sc.nextInt(); 
+ obj1.area(r);
+ System.out.println("Enter the Length & Breath ");
+ int len = sc.nextInt();
+ int br = sc.nextInt();
+ obj1.area(len,br);
+ System.out.println("Enter the Length, Breath & Height ");
+ int l = sc.nextInt();
+ int b = sc.nextInt();
+ int h = sc.nextInt();
+ obj1.area (l, b, h);
+ }
+} 
+/* E:\S2 JAVA LAB 2024\JavaRec>javac Overload.java
+E:\S2 JAVA LAB 2024\JavaRec>java Overload
+Enter the Radius
+2
+Area of Circle = 12.56
+Enter the Length
+3
+Enter the Breath
+4
+Area of Rectangle = 12
+Enter the Length
+3
+Enter the Breath
+4
+Enter the Height */
+------------------------------------------------------------------------------------------------------------------------------------------
+2. CO3.2 Create a class ‘Employee’ with data members Empid, Name, Salary, 
+Address and constructors to initialize the data members. Create another 
+class ‘Teacher’ that inherit the properties of class employee and contain its 
+own data members department, Subjects taught and constructors to 
+initialize these data members and also include display function to display 
+all the data members. Use array of objects to display details of N 
+teachers. //TeacherArrOb.java
+import java.util.Scanner;
+/* Create a class Employee with data members: Empid , Name, Salary, Address & constructors to initialize the data members*/
+class Employee
+{
+ protected int empId;
+ protected String name;
+ protected double salary;
+ protected String address;
+ public Employee(int empId, String name, double salary, String address) 
+ {
+ this.empId = empId;
+ this.name = name;
+ this.salary = salary;
+ this.address = address;
+ }
+}
+/*Create another class Teacher that inherits the properties of class Employee & contains its own data 
+members department, Subjects taught and constructors to initialize these data members and include 
+a display function to display all the data members */
+class Teacher extends Employee
+{ private String dept;
+ private String sub;
+ public Teacher(int empId, String name, double salary, String address, 
+ String dept, String sub) 
+ { super (empId, name, salary, address);
+ this.dept = dept;
+ this.sub = sub;
+ }
+ public void display() 
+ {
+ System.out.println("Employee ID: " + empId);
+ System.out.println("Name: " + name);
+ System.out.println("Salary: " + salary);
+ System.out.println("Address: " + address);
+ System.out.println("Department: " + dept);
+ System.out.println("Subjects Taught: " + sub);
+ System.out.println();
+ }
+}
+ //Use array of objects to display details of N teachers
+public class TeacherArrOb
+{
+ public static void main(String[] args) 
+ {
+ Scanner sc = new Scanner (System.in);
+ System.out.print ("Enter the number of teachers: ");
+ int N = sc.nextInt();
+ sc.nextLine(); // Consume newline
+ Teacher[ ] teachers = new Teacher[N];
+ System.out.println("Enter details for Teacher ");
+ for (int i = 0; i < N; i++) 
+ {
+ System.out.print("Employee ID: ");
+ int empId = sc.nextInt();
+ sc.nextLine(); // Consume newline
+ System.out.print("Name: ");
+ String name = sc.nextLine();
+ System.out.print("Salary: ");
+ double salary = sc.nextDouble();
+ sc.nextLine(); // Consume newline
+ System.out.print("Address: ");
+ String address = sc.nextLine();
+ System.out.print("Department: ");
+ String dept = sc.nextLine();
+ System.out.print("Subjects Taught: ");
+ String sub = sc.nextLine();
+ teachers[i] = new Teacher(empId, name, salary, address, dept, sub);
+ }
+ System.out.println("\nDetails of all teachers:");
+ for (Teacher teacher: teachers) 
+ teacher.display();
+ }
+}
+ /* for .Each 
+ for (type var : array) 
+ { 
+ statements using var;
+ } */
+/*E:\S2 JAVA LAB 2024\JavaRec>javac TeacherArrOb.java
+E:\S2 JAVA LAB 2024\JavaRec>java TeacherArrOb
+Enter the number of teachers: 2
+Enter details for Teacher
+Employee ID: 100
+Name: Fariza
+Salary: 30000
+Address: asaddsfsd
+Department: MCA
+Subjects Taught: OB
+Employee ID: 101
+Name: Anu
+Salary: 25000
+Address: sdfdsf
+Department: MSc
+Subjects Taught: DAA
+Details of all teachers:
+Employee ID: 100
+Name: Fariza
+Salary: 30000.0
+Address: asaddsfsd
+Department: MCA
+Subjects Taught: OB
+Employee ID: 101
+Name: Anu
+Salary: 25000.0
+Address: sdfdsf
+Department: MSc
+Subjects Taught: DAA */
+----------------------------------------------------------------------------------------------------------------------------------------
+3. CO3.3 Create a class ‘Person’ with data members Name, Gender, Address, 
+Age and a constructor to initialize the data members and another class 
+‘Employee’ that inherits the properties of class Person and also contains its 
+own data members like Empid, Company_name, Qualification, Salary and 
+its own constructor. Create another class ‘Teacher’ that inherits the 
+properties of class Employee and contains its own data members like Subject, 
+Department, Teacherid and also contain constructors and methods to 
+display the data members. Use array of objects to display details of N 
+teachers. //MultilevelTeacher.java
+import java.util.Scanner;
+class Person
+{
+ {
+ String name, gender, addr;
+ int age;
+ Person (String name, String gender, String addr, int age)
+ {
+ this.name = name;
+ this.gender = gender;
+ this.addr = addr;
+ this.age = age;
+ }
+}
+class Employee extends Person
+{
+ int empid;
+ String compName, qual;
+ double salary;
+ Employee (String name, String gender, String addr, int age, 
+ int empid, String compName, String qual, double salary)
+ {
+ super(name, gender, addr, age);
+ this.empid = empid;
+ this.compName = compName;
+ this.qual = qual;
+ this.salary = salary;
+ }
+}
+class Teacher extends Employee
+{
+ String sub, dept;
+ int Tid;
+ Teacher(String name, String gender, String addr, int age, int empid, 
+ String compName, String qual, double salary, String sub, 
+ String dept, int Tid) 
+ {
+ super(name, gender, addr, age, empid, compName, qual, salary);
+ this.sub = sub;
+ this.dept = dept;
+ this.Tid = Tid;
+ }
+ void display()
+ {
+ System.out.println ("Name: " + name);
+ System.out.println ("Gender: " + gender);
+ System.out.println ("Address: " + addr);
+ System.out.println("Age: " + age);
+ System.out.println("Employee ID: " + empid);
+ System.out.println("Company Name: " + compName);
+ System.out.println("Qualification: " + qual);
+ System.out.println("Salary: " + salary);
+ System.out.println("Subject: " + sub);
+ System.out.println("Department: " + dept);
+ System.out.println("Teacher ID: " + Tid);
+ }
+}
+public class MultilevelTeacher
+{
+ public static void main(String[] args)
+ {
+ Scanner sc = new Scanner (System.in);
+ System.out.print("Enter the number of teachers: ");
+ int n = sc.nextInt();
+ Teacher[] teachers = new Teacher[n];
+ System.out.println("Enter details for teacher ");
+ for (int i = 0; i < n; i++) 
+ {
+ System.out.print("Name: ");
+ String name = sc.next();
+ System.out.print("Gender: ");
+ String gender = sc.next();
+ System.out.print("Address: ");
+ String addr = sc.next();
+ System.out.print("Age: ");
+ int age = sc.nextInt();
+ System.out.print("Employee ID: ");
+ int empid = sc.nextInt();
+ System.out.print("Company Name: ");
+ String compName = sc.next();
+ System.out.print("Qualification: ");
+ String qual = sc.next();
+ System.out.print("Salary: ");
+ double salary = sc.nextDouble();
+ System.out.print("Subject: ");
+ String sub = sc.next();
+ System.out.print("Department: ");
+ String dept =sc.next();
+ System.out.print("Teacher ID: ");
+ int Tid = sc.nextInt();
+ teachers[i] = new Teacher(name, gender, addr, age, empid, 
+ compName, qual, salary, sub, dept, Tid);
+ }
+ System.out.println("\nDetails of Teachers:");
+ for (Teacher i: teachers) 
+ {
+ i.display ( );
+ System.out.println();
+ }
+ }
+}
+/*
+E:\S2 JAVA LAB 2024\JavaRec>javac MultilevelTeacher.java
+E:\S2 JAVA LAB 2024\JavaRec>java MultilevelTeacher
+Enter the number of teachers: 2
+Enter details for teacher
+Name: ammu
+Gender: f
+Address: qqweq
+Age: 34
+Employee ID: 10
+Company Name: icet
+Qualification: mca
+Salary: 50000
+Subject: cn
+Department: mca
+Teacher ID: 110
+Name: feby
+Gender: m
+Address: sfdfd
+Age: 25
+Employee ID: 11
+Company Name: eeee
+Qualification: mba
+Salary: 60000
+Subject: ob
+Department: mba
+Teacher ID: 111
+Details of Teachers:
+Name: ammu
+Gender: f
+Address: qqweq
+Age: 34
+Employee ID: 10
+Company Name: icet
+Qualification: mca
+Salary: 50000.0
+Subject: cn
+Department: mca
+Teacher ID: 110
+Name: feby
+Gender: m
+Address: sfdfd
+Age: 25
+Employee ID: 11
+Company Name: eeee
+Qualification: mba
+Salary: 60000.0
+Subject: ob
+Department: mba
+Teacher ID: 111 */
+-----------------------------------------------------------------------------------------------------------------------------------------
+4. CO3.4 Write a program that has class Publisher, Book, Literature &
+Fiction. Read the information and print the details of books from either the 
+category, using hierarchical inheritance. //BookInheritance.java
+import java.util.Scanner;
+class Publisher
+{
+ String name;
+ public void getPublisherDetails()
+ {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter Publisher Name: ");
+ name = sc.nextLine();
+ }
+}
+class Book extends Publisher
+{
+ String title;
+ int year;
+ public void getBookDetails()
+ {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter Book Title: ");
+ title = sc.nextLine();
+ System.out.print("Enter Publication Year: ");
+ year = sc.nextInt();
+ sc.nextLine(); // Consume newline
+ }
+ public void displayBookDetails()
+ {
+ System.out.println("\nPublisher: " + name);
+ System.out.println("Title: " + title);
+ System.out.println("Year of Publication: " + year);
+ }
+}
+class Literature extends Book
+{
+ String gen;
+ public void getLiteratureDetails()
+ {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter Generation: ");
+ gen = sc.nextLine();
+ }
+ @Override
+ public void displayBookDetails()
+ {
+ super.displayBookDetails();
+ System.out.println("Generation: " + gen);
+ }
+}
+class Fiction extends Book
+{
+ String theme;
+ public void getFictionDetails()
+ {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter Theme: ");
+ theme = sc.nextLine();
+ }
+ @Override
+ public void displayBookDetails()
+ {
+ super.displayBookDetails();
+ System.out.println("Theme: " + theme);
+ }
+}
+public class BookInheritance
+{
+ public static void main(String[] args) 
+ {
+ Scanner sc = new Scanner(System.in);
+ System.out.print("Enter the number of literature books: ");
+ int numLitBooks = sc.nextInt();
+ Literature[] litBooks = new Literature[numLitBooks];
+ System.out.println("Enter details for literature books:");
+ for (int i = 0; i < numLitBooks; i++) 
+ {
+ litBooks[i] = new Literature();
+ litBooks[i].getPublisherDetails();
+ litBooks[i].getBookDetails();
+ litBooks[i].getLiteratureDetails();
+ }
+ System.out.print("Enter the number of fiction books: ");
+ int numFicBooks = sc.nextInt();
+ Fiction[] ficBooks = new Fiction[numFicBooks];
+ System.out.println("Enter details for fiction books:");
+ for (int i = 0; i < numFicBooks; i++) 
+ {
+ ficBooks[i] = new Fiction();
+ ficBooks[i].getPublisherDetails();
+ ficBooks[i].getBookDetails();
+ ficBooks[i].getFictionDetails();
+ }
+ System.out.println("\nLiterature Books:");
+ for (Literature litBook : litBooks) 
+ {
+ litBook.displayBookDetails();
+ System.out.println();
+ }
+ System.out.println("\nFiction Books:");
+ for (Fiction ficBook : ficBooks) 
+ {
+ ficBook.displayBookDetails();
+ System.out.println();
+ }
+ }
+}
+/*E:\S2 JAVA LAB 2024\JavaRec>javac BookInheritance.java
+E:\S2 JAVA LAB 2024\JavaRec>java BookInheritance
+Enter the number of literature books: 2
+Enter details for literature books:
+Enter Publisher Name: Harper Lee, Sissy Spacek
+Enter Book Title: To Kill a Mockingbird
+Enter Publication Year: 2014
+Enter Generation: 2
+Enter Publisher Name: George Orwell and Christopher Hitchens
+Enter Book Title: Animal Farm
+Enter Publication Year: 2010
+Enter Generation: 1
+Enter the number of fiction books: 1
+Enter details for fiction books:
+Enter Publisher Name: Penguin Random House
+Enter Book Title: Triple Romancing
+Enter Publication Year: 2016
+Enter Theme: novel
+Literature Books:
+Publisher Name: Harper Lee, Sissy Spacek
+Book Title: To Kill a Mockingbird
+Publication Year: 2014
+Generation: 2
+Publisher Name: George Orwell and Christopher Hitchens
+Book Title: Animal Farm
+Publication Year: 2010
+Generation: 1
+Fiction Books:
+Publisher: Penguin Random House
+Title: Triple Romancing
+Year of Publication: 2016
+Theme: novel */
+---------------------------------------------------------------------------------------------------------------------------------------
+5. CO3.5 Create classes Student and Sports. Create another class 
+Result inherited from Student and Sports. Display the academic and 
+sports score of a student.
+import java.util.Scanner;
+interface Student
+{
+ void displayScore();
+}
+interface Sports
+{
+ void displaySpScore();
+}
+class Result implements Student, Sports
+{
+ String name;
+ private int acScore;
+ private int spScore;
+ public Result(String name, int acScore, int spScore)
+ {
+ this.name = name;
+ this.acScore = acScore;
+ this.spScore = spScore;
+ }
+ @Override
+ public void displayScore()
+ {
+System.out.println("Name: " + name);
+ System.out.println("Academic score is: " + acScore);
+ }
+ 
+@Override
+ public void displaySpScore()
+ {
+ System.out.println("Sports score is: " + spScore);
+ }
+}
+public class StudentSports
+{
+ public static void main(String[] args) 
+ {
+ Scanner sc = new Scanner(System.in);
+System.out.print("Enter student's name: ");
+ String name = sc.nextLine();
+ System.out.print ("Enter academic score: ");
+ int acScore = sc.nextInt();
+ System.out.print ("Enter sports score: ");
+ int spScore = sc.nextInt();
+ Result r = new Result (name, acScore, spScore);
+ r.displayScore ();
+ r.displaySpScore ();
+ }
+}
+/* E:\S2 JAVA LAB 2024\JavaRec>javac StudentSports.java
+E:\S2 JAVA LAB 2024\JavaRec>java StudentSports
+Enter student's name: ammu
+Enter academic score: 69
+Enter sports score: 15
+Name: ammu
+Academic score is: 69
+Sports score is: 15 */
